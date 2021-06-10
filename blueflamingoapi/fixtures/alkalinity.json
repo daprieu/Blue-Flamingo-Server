@@ -1,0 +1,42 @@
+[
+    {
+        "model": "blueflamingoapi.alkalinity",
+        "pk": 1,
+        "fields": {
+            "ppm": 0,
+            "message": "Very Low"
+        }
+    },
+    {
+        "model": "blueflamingoapi.alkalinity",
+        "pk": 2,
+        "fields": {
+            "ppm": 40,
+            "message": "Low"
+        }
+    },
+    {
+        "model": "blueflamingoapi.alkalinity",
+        "pk": 3,
+        "fields": {
+            "ppm": 120,
+            "message": "OK"
+        }
+    },
+    {
+        "model": "blueflamingoapi.alkalinity",
+        "pk": 4,
+        "fields": {
+            "ppm": 180,
+            "message": "High"
+        }
+    },
+    {
+        "model": "blueflamingoapi.alkalinity",
+        "pk": 5,
+        "fields": {
+            "ppm": 240,
+            "message": "Very High"
+        }
+    }
+]
