@@ -1,0 +1,10 @@
+[
+    {
+        "model": "blueflamingoapi.pumphouse",
+        "pk": 1,
+        "fields": {
+            "name": "Flamingo",
+            "user": 1
+        }
+    }
+]

@@ -1,0 +1,42 @@
+[
+    {
+        "model": "blueflamingoapi.hardness",
+        "pk": 1,
+        "fields": {
+            "ppm": 0,
+            "message": "Very Low"
+        }
+    },
+    {
+        "model": "blueflamingoapi.hardness",
+        "pk": 2,
+        "fields": {
+            "ppm": 100,
+            "message": "Low"
+        }
+    },
+    {
+        "model": "blueflamingoapi.hardness",
+        "pk": 3,
+        "fields": {
+            "ppm": 250,
+            "message": "Ok"
+        }
+    },
+    {
+        "model": "blueflamingoapi.hardness",
+        "pk": 4,
+        "fields": {
+            "ppm": 500,
+            "message": "High"
+        }
+    },
+    {
+        "model": "blueflamingoapi.hardness",
+        "pk": 5,
+        "fields": {
+            "ppm": 1000,
+            "message": "Very High"
+        }
+    }
+]

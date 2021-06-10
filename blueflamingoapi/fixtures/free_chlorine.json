@@ -1,0 +1,42 @@
+[
+    {
+        "model": "blueflamingoapi.freechlorine",
+        "pk": 1,
+        "fields": {
+            "ppm": 0,
+            "message": "Low"
+        }
+    },
+    {
+        "model": "blueflamingoapi.freechlorine",
+        "pk": 2,
+        "fields": {
+            "ppm": 1,
+            "message": "Ideal"
+        }
+    },
+    {
+        "model": "blueflamingoapi.freechlorine",
+        "pk": 3,
+        "fields": {
+            "ppm": 3,
+            "message": "Ideal"
+        }
+    },
+    {
+        "model": "blueflamingoapi.freechlorine",
+        "pk": 4,
+        "fields": {
+            "ppm": 5,
+            "message": "High"
+        }
+    },
+    {
+        "model": "blueflamingoapi.freechlorine",
+        "pk": 5,
+        "fields": {
+            "ppm": 10,
+            "message": "Very High"
+        }
+    }
+]

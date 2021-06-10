@@ -1,0 +1,42 @@
+[
+    {
+        "model": "blueflamingoapi.salinity",
+        "pk": 1,
+        "fields": {
+            "ppm": 1,
+            "message": "Very Low"
+        }
+    },
+    {
+        "model": "blueflamingoapi.salinity",
+        "pk": 2,
+        "fields": {
+            "ppm": 2,
+            "message": "Low"
+        }
+    },
+    {
+        "model": "blueflamingoapi.salinity",
+        "pk": 3,
+        "fields": {
+            "ppm": 3,
+            "message": "OK"
+        }
+    },
+    {
+        "model": "blueflamingoapi.salinity",
+        "pk": 4,
+        "fields": {
+            "ppm": 4,
+            "message": "High"
+        }
+    },
+    {
+        "model": "blueflamingoapi.salinity",
+        "pk": 5,
+        "fields": {
+            "ppm": 5,
+            "message": "Very High"
+        }
+    }
+]

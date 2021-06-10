@@ -1,0 +1,42 @@
+[
+    {
+        "model": "blueflamingoapi.totalchlorine",
+        "pk": 1,
+        "fields": {
+            "ppm": 6.2,
+            "message": "Very Low"
+        }
+    },
+    {
+        "model": "blueflamingoapi.totalchlorine",
+        "pk": 2,
+        "fields": {
+            "ppm": 6.8,
+            "message": "Ideal"
+        }
+    },
+    {
+        "model": "blueflamingoapi.totalchlorine",
+        "pk": 3,
+        "fields": {
+            "ppm": 7.2,
+            "message": "Ideal"
+        }
+    },
+    {
+        "model": "blueflamingoapi.totalchlorine",
+        "pk": 4,
+        "fields": {
+            "ppm": 7.8,
+            "message": "High"
+        }
+    },
+    {
+        "model": "blueflamingoapi.totalchlorine",
+        "pk": 5,
+        "fields": {
+            "ppm": 8.4,
+            "message": "Very High"
+        }
+    }
+]

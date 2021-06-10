@@ -1,0 +1,42 @@
+[
+    {
+        "model": "blueflamingoapi.ph",
+        "pk": 1,
+        "fields": {
+            "ph": 6.2,
+            "message": "Very Low"
+        }
+    },
+    {
+        "model": "blueflamingoapi.ph",
+        "pk": 2,
+        "fields": {
+            "ph": 6.8,
+            "message": "Low"
+        }
+    },
+    {
+        "model": "blueflamingoapi.ph",
+        "pk": 3,
+        "fields": {
+            "ph": 7.2,
+            "message": "OK"
+        }
+    },
+    {
+        "model": "blueflamingoapi.ph",
+        "pk": 4,
+        "fields": {
+            "ph": 7.8,
+            "message": "High"
+        }
+    },
+    {
+        "model": "blueflamingoapi.ph",
+        "pk": 5,
+        "fields": {
+            "ph": 8.4,
+            "message": "Very High"
+        }
+    }
+]

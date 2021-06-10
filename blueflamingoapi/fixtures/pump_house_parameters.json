@@ -1,0 +1,27 @@
+[
+    {
+        "model": "blueflamingoapi.pumphouseparameters",
+        "pk": 1,
+        "fields": {
+            "date": "2020-08-28T14:51:39.989Z",
+            "pumphouse": 1,
+            "user": 1,
+            "hardness": 3,
+            "hardness_notes": "correct limit",
+            "total_chlorine": 3,
+            "free_chlorine": 3,
+            "chlorine_note": "safe",
+            "ph": 3,
+            "ph_note": "safe",
+            "alkalinity": 3,
+            "alkalinity_note": "safe", 
+            "cyanuric_acid": 3, 
+            "cyanuric_acid_note": "safe",
+            "salinity": 3,
+            "salinity_note": "safe", 
+            "filter_pressure": 3, 
+            "filter_pressure_note": "safe",
+            "filter_basket": true 
+        }
+    }
+]
