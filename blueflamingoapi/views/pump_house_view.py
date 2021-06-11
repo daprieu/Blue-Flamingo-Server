@@ -44,6 +44,27 @@ class PumpHouseView(ViewSet):
         elif user.is_staff is False:
             return Response({}, status=status.HTTP_403_FORBIDDEN)
 
+    def update(self, request, pk=None):
+        """Handle PUT requests for a game
+        Returns:
+            Response -- Empty body with 204 status code
+        """
+        user = request.auth.user
+        # category = Category.objects.get(pk = request.data["categoryId"])
+        pump_house = PumpHouse.objects.get(pk=pk)
+
+        if user.is_staff is False:
+            return Response({}, status=status.HTTP_403_FORBIDDEN)
+
+        pump_house.user = user
+        pump_house.name = request.data["name"]
+
+        pump_house.save()
+
+        # 204 status code means everything worked but the
+        # server is not sending back any data in the response
+        return Response({}, status=status.HTTP_204_NO_CONTENT)
+
     def list(self, request):
         """Handle GET requests to get all game types
 
