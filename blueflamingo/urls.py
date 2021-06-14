@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from blueflamingoapi.views.hardness_view import HardnessView
 from blueflamingoapi.views.free_chlorine_view import FreeChlorineView
 from blueflamingoapi.views.filter_pressure_view import FilterPressureView
 from blueflamingoapi.views.cyanuric_acid_view import CyanuricAcidView
@@ -30,6 +31,7 @@ router.register(r'alkalinity', AlkalinityView, 'alkalinity')
 router.register(r'cyanuricacid', CyanuricAcidView, 'cyanuricacid')
 router.register(r'filterpressure', FilterPressureView, 'filterpressure')
 router.register(r'freechlorine', FreeChlorineView, 'freechlorine')
+router.register(r'hardness', HardnessView, 'hardness')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
