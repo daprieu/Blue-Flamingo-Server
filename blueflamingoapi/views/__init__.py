@@ -6,3 +6,4 @@ from .cyanuric_acid_view import CyanuricAcidView
 from .filter_pressure_view import FilterPressureView
 from .hardness_view import HardnessView
 from .ph_view import PhView
+from .salinity_view import SalinityView
