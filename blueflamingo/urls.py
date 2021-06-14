@@ -18,7 +18,7 @@ from blueflamingoapi.views.free_chlorine_view import FreeChlorineView
 from blueflamingoapi.views.filter_pressure_view import FilterPressureView
 from blueflamingoapi.views.cyanuric_acid_view import CyanuricAcidView
 from blueflamingoapi.views.alkalinity_view import AlkalinityView
-from blueflamingoapi.views import PumpHouseView
+from blueflamingoapi.views import PumpHouseView, PhView
 from django.contrib import admin
 from django.urls import path
 from blueflamingoapi.views import register_user, login_user
@@ -32,6 +32,7 @@ router.register(r'cyanuricacid', CyanuricAcidView, 'cyanuricacid')
 router.register(r'filterpressure', FilterPressureView, 'filterpressure')
 router.register(r'freechlorine', FreeChlorineView, 'freechlorine')
 router.register(r'hardness', HardnessView, 'hardness')
+router.register(r'ph', PhView, 'ph')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
