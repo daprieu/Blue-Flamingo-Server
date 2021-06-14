@@ -7,3 +7,4 @@ from .filter_pressure_view import FilterPressureView
 from .hardness_view import HardnessView
 from .ph_view import PhView
 from .salinity_view import SalinityView
+from .pump_house_parameters_view import PumphouseParametersView
