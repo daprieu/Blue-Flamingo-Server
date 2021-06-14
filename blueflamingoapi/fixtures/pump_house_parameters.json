@@ -7,7 +7,7 @@
             "pumphouse": 1,
             "user": 1,
             "hardness": 3,
-            "hardness_notes": "correct limit",
+            "hardness_note": "correct limit",
             "total_chlorine": 3,
             "free_chlorine": 3,
             "chlorine_note": "safe",
