@@ -153,3 +153,4 @@ class PumphouseParametersSerializer(serializers.ModelSerializer):
                 'free_chlorine', 'chlorine_note', 'ph', 'ph_note', 'alkalinity',
                 'alkalinity_note', 'cyanuric_acid', 'cyanuric_acid_note', 'salinity', 
                 'salinity_note', 'filter_pressure', 'filter_pressure_note', 'filter_basket',)
+        depth = 1
