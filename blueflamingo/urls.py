@@ -17,6 +17,7 @@ from blueflamingoapi.views.pump_house_parameters_view import PumphouseParameters
 from blueflamingoapi.views.salinity_view import SalinityView
 from blueflamingoapi.views.hardness_view import HardnessView
 from blueflamingoapi.views.free_chlorine_view import FreeChlorineView
+from blueflamingoapi.views.total_chlorine_view import TotalChlorineView
 from blueflamingoapi.views.filter_pressure_view import FilterPressureView
 from blueflamingoapi.views.cyanuric_acid_view import CyanuricAcidView
 from blueflamingoapi.views.alkalinity_view import AlkalinityView
@@ -37,6 +38,7 @@ router.register(r'hardness', HardnessView, 'hardness')
 router.register(r'ph', PhView, 'ph')
 router.register(r'salinity', SalinityView, 'salinity')
 router.register(r'pumphousedata', PumphouseParametersView, 'pumphousedata')
+router.register(r'totalchlorine', TotalChlorineView, 'totalchlorine')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
