@@ -1,4 +1,4 @@
-from blueflamingoapi.models import TotalChlorine
+from blueflamingoapi.models import TotalChlorine, total_chlorine
 from django.http.response import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
@@ -33,7 +33,7 @@ class TotalChlorineView(ViewSet):
         if user.is_staff is True:
             try:
                 user = request.auth.user
-                total_chlorine = TotalChlorine.objects.get(pk=pk, user=user)
+                total_chlorine = TotalChlorine.objects.get(pk=pk)
                 total_chlorine.delete()
 
                 return Response({}, status=status.HTTP_204_NO_CONTENT)
@@ -94,6 +94,19 @@ class TotalChlorineView(ViewSet):
         serializer = TotalChlorineSerializer(
             total_chlorine, many=True, context={'request': request})
         return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        """Handle GET requests for single game type
+
+        Returns:
+            Response -- JSON serialized game type
+        """
+        try:
+            total_chlorine = TotalChlorine.objects.get(pk=pk)
+            serializer = TotalChlorineSerializer(total_chlorine, context={'request': request})
+            return Response(serializer.data)
+        except Exception as ex:
+            return HttpResponseServerError(ex)
 
 
 class TotalChlorineSerializer(serializers.ModelSerializer):

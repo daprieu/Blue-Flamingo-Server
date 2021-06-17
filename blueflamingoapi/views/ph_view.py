@@ -33,7 +33,7 @@ class PhView(ViewSet):
         if user.is_staff is True:
             try:
                 user = request.auth.user
-                ph = Ph.objects.get(pk=pk, user=user)
+                ph = Ph.objects.get(pk=pk)
                 ph.delete()
 
                 return Response({}, status=status.HTTP_204_NO_CONTENT)
@@ -95,6 +95,18 @@ class PhView(ViewSet):
             ph, many=True, context={'request': request})
         return Response(serializer.data)
 
+    def retrieve(self, request, pk=None):
+        """Handle GET requests for single game type
+
+        Returns:
+            Response -- JSON serialized game type
+        """
+        try:
+            ph = Ph.objects.get(pk=pk)
+            serializer = PhSerializer(ph, context={'request': request})
+            return Response(serializer.data)
+        except Exception as ex:
+            return HttpResponseServerError(ex)
 
 class PhSerializer(serializers.ModelSerializer):
     class Meta:
