@@ -1,3 +1,4 @@
+from blueflamingoapi.models import filter_pressure
 from blueflamingoapi.models.filter_pressure import FilterPressure
 from django.http.response import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
@@ -33,7 +34,7 @@ class FilterPressureView(ViewSet):
         if user.is_staff is True:
             try:
                 user = request.auth.user
-                filter_pressure = FilterPressure.objects.get(pk=pk, user=user)
+                filter_pressure = FilterPressure.objects.get(pk=pk)
                 filter_pressure.delete()
 
                 return Response({}, status=status.HTTP_204_NO_CONTENT)
@@ -94,6 +95,19 @@ class FilterPressureView(ViewSet):
         serializer = FilterPressureSerializer(
             filter_pressure, many=True, context={'request': request})
         return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        """Handle GET requests for single game type
+
+        Returns:
+            Response -- JSON serialized game type
+        """
+        try:
+            filter_pressure = FilterPressure.objects.get(pk=pk)
+            serializer = FilterPressureSerializer(filter_pressure, context={'request': request})
+            return Response(serializer.data)
+        except Exception as ex:
+            return HttpResponseServerError(ex)
 
 
 class FilterPressureSerializer(serializers.ModelSerializer):

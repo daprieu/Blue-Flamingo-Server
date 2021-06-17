@@ -1,3 +1,4 @@
+from blueflamingoapi.models import salinity
 from blueflamingoapi.models.salinity import Salinity
 from django.http.response import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
@@ -33,7 +34,7 @@ class SalinityView(ViewSet):
         if user.is_staff is True:
             try:
                 user = request.auth.user
-                salinity = Salinity.objects.get(pk=pk, user=user)
+                salinity = Salinity.objects.get(pk=pk)
                 salinity.delete()
 
                 return Response({}, status=status.HTTP_204_NO_CONTENT)
@@ -94,6 +95,19 @@ class SalinityView(ViewSet):
         serializer = SalinitySerializer(
             salinity, many=True, context={'request': request})
         return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        """Handle GET requests for single game type
+
+        Returns:
+            Response -- JSON serialized game type
+        """
+        try:
+            salinity = Salinity.objects.get(pk=pk)
+            serializer = SalinitySerializer(salinity, context={'request': request})
+            return Response(serializer.data)
+        except Exception as ex:
+            return HttpResponseServerError(ex)
 
 
 class SalinitySerializer(serializers.ModelSerializer):

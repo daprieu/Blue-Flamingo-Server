@@ -33,7 +33,7 @@ class CyanuricAcidView(ViewSet):
         if user.is_staff is True:
             try:
                 user = request.auth.user
-                cyanuric_acid = CyanuricAcid.objects.get(pk=pk, user=user)
+                cyanuric_acid = CyanuricAcid.objects.get(pk=pk)
                 cyanuric_acid.delete()
 
                 return Response({}, status=status.HTTP_204_NO_CONTENT)
@@ -94,6 +94,19 @@ class CyanuricAcidView(ViewSet):
         serializer = CyanuricAcidSerializer(
             cyanuric_acid, many=True, context={'request': request})
         return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        """Handle GET requests for single game type
+
+        Returns:
+            Response -- JSON serialized game type
+        """
+        try:
+            cyanuric_acid = CyanuricAcid.objects.get(pk=pk)
+            serializer = CyanuricAcidSerializer(cyanuric_acid, context={'request': request})
+            return Response(serializer.data)
+        except Exception as ex:
+            return HttpResponseServerError(ex)
 
 
 class CyanuricAcidSerializer(serializers.ModelSerializer):

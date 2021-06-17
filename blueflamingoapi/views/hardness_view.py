@@ -1,3 +1,4 @@
+from blueflamingoapi.models import hardness
 from blueflamingoapi.models.hardness import Hardness
 from django.http.response import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
@@ -33,7 +34,7 @@ class HardnessView(ViewSet):
         if user.is_staff is True:
             try:
                 user = request.auth.user
-                hardness = Hardness.objects.get(pk=pk, user=user)
+                hardness = Hardness.objects.get(pk=pk)
                 hardness.delete()
 
                 return Response({}, status=status.HTTP_204_NO_CONTENT)
@@ -94,6 +95,20 @@ class HardnessView(ViewSet):
         serializer = HardnessSerializer(
             hardness, many=True, context={'request': request})
         return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        """Handle GET requests for single game type
+
+        Returns:
+            Response -- JSON serialized game type
+        """
+        try:
+            hardness = Hardness.objects.get(pk=pk)
+            serializer = HardnessSerializer(hardness, context={'request': request})
+            return Response(serializer.data)
+        except Exception as ex:
+            return HttpResponseServerError(ex)
+
 
 
 class HardnessSerializer(serializers.ModelSerializer):

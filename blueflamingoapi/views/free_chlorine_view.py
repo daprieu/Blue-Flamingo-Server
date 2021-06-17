@@ -1,3 +1,4 @@
+from blueflamingoapi.models import free_chlorine
 from blueflamingoapi.models.free_chlorine import FreeChlorine
 from django.http.response import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
@@ -33,7 +34,7 @@ class FreeChlorineView(ViewSet):
         if user.is_staff is True:
             try:
                 user = request.auth.user
-                free_chlorine = FreeChlorine.objects.get(pk=pk, user=user)
+                free_chlorine = FreeChlorine.objects.get(pk=pk)
                 free_chlorine.delete()
 
                 return Response({}, status=status.HTTP_204_NO_CONTENT)
@@ -94,6 +95,19 @@ class FreeChlorineView(ViewSet):
         serializer = FreeChlorineSerializer(
             free_chlorine, many=True, context={'request': request})
         return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        """Handle GET requests for single game type
+
+        Returns:
+            Response -- JSON serialized game type
+        """
+        try:
+            free_chlorine = FreeChlorine.objects.get(pk=pk)
+            serializer = FreeChlorineSerializer(free_chlorine, context={'request': request})
+            return Response(serializer.data)
+        except Exception as ex:
+            return HttpResponseServerError(ex)
 
 
 class FreeChlorineSerializer(serializers.ModelSerializer):
