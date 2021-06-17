@@ -32,8 +32,8 @@ class AlkalinityView(ViewSet):
 
         if user.is_staff is True:
             try:
-                user = request.auth.user
-                alkalinity = Alkalinity.objects.get(pk=pk, user=user)
+                # user = request.auth.user
+                alkalinity = Alkalinity.objects.get(pk=pk)
                 alkalinity.delete()
 
                 return Response({}, status=status.HTTP_204_NO_CONTENT)
@@ -94,6 +94,19 @@ class AlkalinityView(ViewSet):
         serializer = AlkalinitySerializer(
             alkalinity, many=True, context={'request': request})
         return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        """Handle GET requests for single game type
+
+        Returns:
+            Response -- JSON serialized game type
+        """
+        try:
+            alkalinity = Alkalinity.objects.get(pk=pk)
+            serializer = AlkalinitySerializer(alkalinity, context={'request': request})
+            return Response(serializer.data)
+        except Exception as ex:
+            return HttpResponseServerError(ex)
 
 
 class AlkalinitySerializer(serializers.ModelSerializer):

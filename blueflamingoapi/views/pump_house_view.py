@@ -71,21 +71,9 @@ class PumpHouseView(ViewSet):
         Returns:
             Response -- JSON serialized list of game types
         """
-        user = request.auth.user
-        if user.is_staff is True:
-            pump_house = PumpHouse.objects.all()
+        
+        pump_house = PumpHouse.objects.all()
 
-        # elif user.is_staff is False:
-        #     date_thresh = datetime.now()
-        #     pump_house = pump_house.objects.all().order_by("-publication_date").filter(approved=True).filter(
-        #         publication_date__lt=date_thresh)
-
-        user_id = request.query_params.get('user_id', None)
-        if user_id is not None and user_id == str(user.id):
-            pump_house = pump_house.objects.all()
-            pump_house = pump_house.filter(user__id=user_id)
-        if user_id is not None and user_id != str(user.id):
-            return Response({}, status=status.HTTP_403_FORBIDDEN)
         # # Note the additional `many=True` argument to the
         # # serializer. It's needed when you are serializing
         # # a list of objects instead of a single object.
