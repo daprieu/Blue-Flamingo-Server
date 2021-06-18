@@ -57,7 +57,7 @@ class PumphouseParametersView(ViewSet):
         user = request.auth.user
         pump_house_parameters = PumphouseParameters.objects.get(pk=pk, user=user)
 
-        if user is pump_house_parameters.user:
+        if user.id is pump_house_parameters.user.id:
             try:
                 user = request.auth.user
                 pump_house_parameters.delete()
@@ -68,7 +68,7 @@ class PumphouseParametersView(ViewSet):
             
             except Exception as ex:
                 return Response({'message': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        elif user is not pump_house_parameters.user:
+        elif user.id is not pump_house_parameters.user.id:
             return Response({}, status=status.HTTP_403_FORBIDDEN)
 
     def update(self, request, pk=None):
@@ -80,13 +80,17 @@ class PumphouseParametersView(ViewSet):
         # category = Category.objects.get(pk = request.data["categoryId"])
         pump_house_parameters = PumphouseParameters.objects.get(pk=pk)
 
-        if user is not pump_house_parameters.user:
+        if user.id is not pump_house_parameters.user.id:
             return Response({}, status=status.HTTP_403_FORBIDDEN)
 
         user = request.auth.user
-        pump_house_parameters = PumphouseParameters()
-        pump_house_parameters.pumphouse = request.data['pumphouse']
-        if request.data['hardness'] is not None:
+        # pump_house_parameters = PumphouseParameters()
+        pump_house_parameters.date = datetime.now()
+        pump_house_parameters.user = user
+        pump_house_parameters.pumphouse = PumpHouse.objects.get(pk=request.data['pumphouse'])
+        if pump_house_parameters.hardness is None:
+            pump_house_parameters.hardness = None
+        elif request.data['hardness'] is not None:
             pump_house_parameters.hardness = Hardness.objects.get(pk=request.data['hardness'])
         pump_house_parameters.hardness_note = request.data['hardness_note']
         if request.data['total_chlorine'] is not None:
@@ -144,6 +148,19 @@ class PumphouseParametersView(ViewSet):
         serializer = PumphouseParametersSerializer(
             pump_house_parameters, many=True, context={'request': request})
         return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        """Handle GET requests for single game type
+
+        Returns:
+            Response -- JSON serialized game type
+        """
+        try:
+            pump_house_parameters = PumphouseParameters.objects.get(pk=pk)
+            serializer = PumphouseParametersSerializer(pump_house_parameters, context={'request': request})
+            return Response(serializer.data)
+        except Exception as ex:
+            return HttpResponseServerError(ex)
 
 
 class PumphouseParametersSerializer(serializers.ModelSerializer):
