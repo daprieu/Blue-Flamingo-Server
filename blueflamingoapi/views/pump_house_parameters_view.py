@@ -88,31 +88,62 @@ class PumphouseParametersView(ViewSet):
         pump_house_parameters.date = datetime.now()
         pump_house_parameters.user = user
         pump_house_parameters.pumphouse = PumpHouse.objects.get(pk=request.data['pumphouse'])
+        # Hardness
         if pump_house_parameters.hardness is None:
-            pump_house_parameters.hardness = None
+            try: pump_house_parameters.hardness = Hardness.objects.get(pk=request.data['hardness'])
+            except: pump_house_parameters.hardness = None
         elif request.data['hardness'] is not None:
             pump_house_parameters.hardness = Hardness.objects.get(pk=request.data['hardness'])
         pump_house_parameters.hardness_note = request.data['hardness_note']
-        if request.data['total_chlorine'] is not None:
-            pump_house_parameters.total_chlorine = TotalChlorine.objects.get(pk=request.data['total_chlorine'])
-        if request.data['free_chlorine'] is not None:
+        # Total Chlorine
+        if pump_house_parameters.total_chlorine is None:
+            try: pump_house_parameters.total_chlorine = TotalChlorine.objects.get(pk=request.data['total_chlorine'])
+            except: pump_house_parameters.total_chlorine = None
+        elif request.data['total_chlorine'] is not None:
+                pump_house_parameters.total_chlorine = TotalChlorine.objects.get(pk=request.data['total_chlorine'])
+        #  Free Chlorine
+        if pump_house_parameters.free_chlorine is None:
+            try: pump_house_parameters.free_chlorine = FreeChlorine.objects.get(pk=request.data['free_chlorine'])        
+            except: pump_house_parameters.free_chlorine = None
+        elif request.data['free_chlorine'] is not None:
             pump_house_parameters.free_chlorine = FreeChlorine.objects.get(pk=request.data['free_chlorine'])
         pump_house_parameters.chlorine_note = request.data['chlorine_note']
-        if request.data['ph'] is not None:
+        # pH
+        if pump_house_parameters.ph is None:
+            try: pump_house_parameters.ph = Ph.objects.get(pk=request.data['ph'])        
+            except: pump_house_parameters.ph = None
+        elif request.data['ph'] is not None:
             pump_house_parameters.ph = Ph.objects.get(pk=request.data['ph'])
         pump_house_parameters.ph_note = request.data['ph_note']
-        if request.data['alkalinity'] is not None:
+        #  Alkalinity
+        if pump_house_parameters.alkalinity is None:
+            try: pump_house_parameters.alkalinity = Alkalinity.objects.get(pk=request.data['alkalinity'])        
+            except: pump_house_parameters.alkalinity = None
+        elif request.data['alkalinity'] is not None:
             pump_house_parameters.alkalinity = Alkalinity.objects.get(pk=request.data['alkalinity'])
         pump_house_parameters.alkalinity_note = request.data['alkalinity_note']
-        if request.data['cyanuric_acid'] is not None:
+        #  Cyanuric Acid
+        if pump_house_parameters.cyanuric_acid is None:
+            try: pump_house_parameters.cyanuric_acid = CyanuricAcid.objects.get(pk=request.data['cyanuric_acid'])        
+            except: pump_house_parameters.cyanuric_acid = None
+        elif request.data['cyanuric_acid'] is not None:
             pump_house_parameters.cyanuric_acid = CyanuricAcid.objects.get(pk=request.data['cyanuric_acid'])
         pump_house_parameters.cyanuric_acid_note = request.data['cyanuric_acid_note']
-        if request.data['salinity'] is not None:
+        #  Salinity
+        if pump_house_parameters.salinity is None:
+            try: pump_house_parameters.salinity = Salinity.objects.get(pk=request.data['salinity'])        
+            except: pump_house_parameters.salinity = None
+        elif request.data['salinity'] is not None:
             pump_house_parameters.salinity = Salinity.objects.get(pk=request.data['salinity'])
         pump_house_parameters.salinity_note = request.data['salinity_note']
-        if request.data['filter_pressure'] is not None:
+        #  Filter Pressure
+        if pump_house_parameters.filter_pressure is None:
+            try: pump_house_parameters.filter_pressure = FilterPressure.objects.get(pk=request.data['filter_pressure'])        
+            except: pump_house_parameters.filter_pressure = None
+        elif request.data['filter_pressure'] is not None:
             pump_house_parameters.filter_pressure = FilterPressure.objects.get(pk=request.data['filter_pressure'])
         pump_house_parameters.filter_pressure_note = request.data['filter_pressure_note']
+        #  Filter Basket
         pump_house_parameters.filter_basket = request.data['filter_basket']
 
         pump_house_parameters.save()
