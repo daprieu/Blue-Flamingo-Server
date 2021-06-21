@@ -82,6 +82,18 @@ class PumpHouseView(ViewSet):
             pump_house, many=True, context={'request': request})
         return Response(serializer.data)
 
+    def retrieve(self, request, pk=None):
+        """Handle GET requests for single game type
+
+        Returns:
+            Response -- JSON serialized game type
+        """
+        try:
+            pump_house = PumpHouse.objects.get(pk=pk)
+            serializer = PumpHouseSerializer(pump_house, context={'request': request})
+            return Response(serializer.data)
+        except Exception as ex:
+            return HttpResponseServerError(ex)
 
 class PumpHouseSerializer(serializers.ModelSerializer):
     class Meta:
