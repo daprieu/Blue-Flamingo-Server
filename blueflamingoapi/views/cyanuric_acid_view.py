@@ -14,7 +14,6 @@ class CyanuricAcidView(ViewSet):
         cyanuric_acid = CyanuricAcid()
         cyanuric_acid.ppm = request.data["ppm"]
         cyanuric_acid.message = request.data["message"]
-        # cyanuric_acid.user = user
 
         if user.is_staff is True:
             try:
@@ -51,7 +50,6 @@ class CyanuricAcidView(ViewSet):
             Response -- Empty body with 204 status code
         """
         user = request.auth.user
-        # category = Category.objects.get(pk = request.data["categoryId"])
         cyanuric_acid = CyanuricAcid.objects.get(pk=pk)
 
         if user.is_staff is False:
@@ -76,20 +74,12 @@ class CyanuricAcidView(ViewSet):
         user = request.auth.user
         cyanuric_acid = CyanuricAcid.objects.all()
 
-        # elif user.is_staff is False:
-        #     date_thresh = datetime.now()
-        #     cyanuric_acid = cyanuric_acid.objects.all().order_by("-publication_date").filter(approved=True).filter(
-        #         publication_date__lt=date_thresh)
-
         user_id = request.query_params.get('user_id', None)
         if user_id is not None and user_id == str(user.id):
             cyanuric_acid = CyanuricAcid.objects.all()
             cyanuric_acid = CyanuricAcid.filter(user__id=user_id)
         if user_id is not None and user_id != str(user.id):
             return Response({}, status=status.HTTP_403_FORBIDDEN)
-        # # Note the additional `many=True` argument to the
-        # # serializer. It's needed when you are serializing
-        # # a list of objects instead of a single object.
 
         serializer = CyanuricAcidSerializer(
             cyanuric_acid, many=True, context={'request': request})

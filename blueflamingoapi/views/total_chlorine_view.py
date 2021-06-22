@@ -14,7 +14,6 @@ class TotalChlorineView(ViewSet):
         total_chlorine = TotalChlorine()
         total_chlorine.ppm = request.data["ppm"]
         total_chlorine.message = request.data["message"]
-        # total_chlorine.user = user
 
         if user.is_staff is True:
             try:
@@ -51,7 +50,6 @@ class TotalChlorineView(ViewSet):
             Response -- Empty body with 204 status code
         """
         user = request.auth.user
-        # category = Category.objects.get(pk = request.data["categoryId"])
         total_chlorine = TotalChlorine.objects.get(pk=pk)
 
         if user.is_staff is False:
@@ -76,20 +74,12 @@ class TotalChlorineView(ViewSet):
         user = request.auth.user
         total_chlorine = TotalChlorine.objects.all()
 
-        # elif user.is_staff is False:
-        #     date_thresh = datetime.now()
-        #     total_chlorine = total_chlorine.objects.all().order_by("-publication_date").filter(approved=True).filter(
-        #         publication_date__lt=date_thresh)
-
         user_id = request.query_params.get('user_id', None)
         if user_id is not None and user_id == str(user.id):
             total_chlorine = TotalChlorine.objects.all()
             total_chlorine = TotalChlorine.filter(user__id=user_id)
         if user_id is not None and user_id != str(user.id):
             return Response({}, status=status.HTTP_403_FORBIDDEN)
-        # # Note the additional `many=True` argument to the
-        # # serializer. It's needed when you are serializing
-        # # a list of objects instead of a single object.
 
         serializer = TotalChlorineSerializer(
             total_chlorine, many=True, context={'request': request})
