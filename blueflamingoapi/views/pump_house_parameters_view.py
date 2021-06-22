@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from blueflamingoapi.models.ph import Ph
 from blueflamingoapi.models.pump_house_parameters import PumphouseParameters
 from blueflamingoapi.models import (PumpHouse, Hardness, Alkalinity, CyanuricAcid, FilterPressure, FreeChlorine, 
@@ -42,6 +43,8 @@ class PumphouseParametersView(ViewSet):
         if request.data['filter_pressure'] is not None:
             pump_house_parameters.filter_pressure = FilterPressure.objects.get(pk=request.data['filter_pressure'])
         pump_house_parameters.filter_pressure_note = request.data['filter_pressure_note']
+        if request.data['filter_basket'] is False:
+            return Response({}, status=status.HTTP_403_FORBIDDEN)
         pump_house_parameters.filter_basket = request.data['filter_basket']
 
         
@@ -193,8 +196,14 @@ class PumphouseParametersView(ViewSet):
         except Exception as ex:
             return HttpResponseServerError(ex)
 
+class UserSerializer(serializers.ModelSerializer):
+    """JSON serializer for gamer's related Django user"""
+    class Meta:
+        model = User
+        fields = ('id', 'first_name', 'last_name', 'username')
 
 class PumphouseParametersSerializer(serializers.ModelSerializer):
+    user = UserSerializer(many=False)
     class Meta:
         model = PumphouseParameters
         fields = ('id', 'user', 'date', 'pumphouse', 'hardness',  'hardness_note', 'total_chlorine',
