@@ -15,7 +15,6 @@ class FreeChlorineView(ViewSet):
         free_chlorine = FreeChlorine()
         free_chlorine.ppm = request.data["ppm"]
         free_chlorine.message = request.data["message"]
-        # free_chlorine.user = user
 
         if user.is_staff is True:
             try:
@@ -52,7 +51,6 @@ class FreeChlorineView(ViewSet):
             Response -- Empty body with 204 status code
         """
         user = request.auth.user
-        # category = Category.objects.get(pk = request.data["categoryId"])
         free_chlorine = FreeChlorine.objects.get(pk=pk)
 
         if user.is_staff is False:
@@ -77,20 +75,12 @@ class FreeChlorineView(ViewSet):
         user = request.auth.user
         free_chlorine = FreeChlorine.objects.all()
 
-        # elif user.is_staff is False:
-        #     date_thresh = datetime.now()
-        #     free_chlorine = free_chlorine.objects.all().order_by("-publication_date").filter(approved=True).filter(
-        #         publication_date__lt=date_thresh)
-
         user_id = request.query_params.get('user_id', None)
         if user_id is not None and user_id == str(user.id):
             free_chlorine = FreeChlorine.objects.all()
             free_chlorine = FreeChlorine.filter(user__id=user_id)
         if user_id is not None and user_id != str(user.id):
             return Response({}, status=status.HTTP_403_FORBIDDEN)
-        # # Note the additional `many=True` argument to the
-        # # serializer. It's needed when you are serializing
-        # # a list of objects instead of a single object.
 
         serializer = FreeChlorineSerializer(
             free_chlorine, many=True, context={'request': request})

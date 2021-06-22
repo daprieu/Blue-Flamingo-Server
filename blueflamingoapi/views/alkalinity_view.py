@@ -14,7 +14,6 @@ class AlkalinityView(ViewSet):
         alkalinity = Alkalinity()
         alkalinity.ppm = request.data["ppm"]
         alkalinity.message = request.data["message"]
-        # alkalinity.user = user
 
         if user.is_staff is True:
             try:
@@ -51,7 +50,6 @@ class AlkalinityView(ViewSet):
             Response -- Empty body with 204 status code
         """
         user = request.auth.user
-        # category = Category.objects.get(pk = request.data["categoryId"])
         alkalinity = Alkalinity.objects.get(pk=pk)
 
         if user.is_staff is False:
@@ -75,11 +73,6 @@ class AlkalinityView(ViewSet):
         """
         user = request.auth.user
         alkalinity = Alkalinity.objects.all()
-
-        # elif user.is_staff is False:
-        #     date_thresh = datetime.now()
-        #     alkalinity = alkalinity.objects.all().order_by("-publication_date").filter(approved=True).filter(
-        #         publication_date__lt=date_thresh)
 
         user_id = request.query_params.get('user_id', None)
         if user_id is not None and user_id == str(user.id):

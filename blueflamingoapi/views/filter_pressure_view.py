@@ -52,7 +52,6 @@ class FilterPressureView(ViewSet):
             Response -- Empty body with 204 status code
         """
         user = request.auth.user
-        # category = Category.objects.get(pk = request.data["categoryId"])
         filter_pressure = FilterPressure.objects.get(pk=pk)
 
         if user.is_staff is False:
@@ -77,20 +76,12 @@ class FilterPressureView(ViewSet):
         user = request.auth.user
         filter_pressure = FilterPressure.objects.all()
 
-        # elif user.is_staff is False:
-        #     date_thresh = datetime.now()
-        #     filter_pressure = filter_pressure.objects.all().order_by("-publication_date").filter(approved=True).filter(
-        #         publication_date__lt=date_thresh)
-
         user_id = request.query_params.get('user_id', None)
         if user_id is not None and user_id == str(user.id):
             filter_pressure = FilterPressure.objects.all()
             filter_pressure = FilterPressure.filter(user__id=user_id)
         if user_id is not None and user_id != str(user.id):
             return Response({}, status=status.HTTP_403_FORBIDDEN)
-        # # Note the additional `many=True` argument to the
-        # # serializer. It's needed when you are serializing
-        # # a list of objects instead of a single object.
 
         serializer = FilterPressureSerializer(
             filter_pressure, many=True, context={'request': request})

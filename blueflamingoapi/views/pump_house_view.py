@@ -50,7 +50,6 @@ class PumpHouseView(ViewSet):
             Response -- Empty body with 204 status code
         """
         user = request.auth.user
-        # category = Category.objects.get(pk = request.data["categoryId"])
         pump_house = PumpHouse.objects.get(pk=pk)
 
         if user.is_staff is False:
@@ -73,10 +72,6 @@ class PumpHouseView(ViewSet):
         """
         
         pump_house = PumpHouse.objects.all()
-
-        # # Note the additional `many=True` argument to the
-        # # serializer. It's needed when you are serializing
-        # # a list of objects instead of a single object.
 
         serializer = PumpHouseSerializer(
             pump_house, many=True, context={'request': request})
