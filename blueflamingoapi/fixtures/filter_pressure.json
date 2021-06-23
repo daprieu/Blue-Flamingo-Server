@@ -3,7 +3,7 @@
         "model": "blueflamingoapi.filterpressure",
         "pk": 1,
         "fields": {
-            "psi": 0,
+            "psi": 15,
             "message": "Low"
         }
     },
@@ -11,7 +11,7 @@
         "model": "blueflamingoapi.filterpressure",
         "pk": 2,
         "fields": {
-            "psi": 1,
+            "psi": 20,
             "message": "Ideal"
         }
     },
@@ -19,7 +19,7 @@
         "model": "blueflamingoapi.filterpressure",
         "pk": 3,
         "fields": {
-            "psi": 3,
+            "psi": 25,
             "message": "Ideal"
         }
     },
@@ -27,7 +27,7 @@
         "model": "blueflamingoapi.filterpressure",
         "pk": 4,
         "fields": {
-            "psi": 5,
+            "psi": 30,
             "message": "High"
         }
     },
@@ -35,7 +35,7 @@
         "model": "blueflamingoapi.filterpressure",
         "pk": 5,
         "fields": {
-            "psi": 10,
+            "psi": 35,
             "message": "Very High"
         }
     }

@@ -8,25 +8,5 @@
             "address": "123 asdf st.",
             "title": "tech"
         }
-    },
-    {
-        "model": "blueflamingoapi.technician",
-        "pk": 2,
-        "fields": {
-            "user": 2,
-            "phone_number": "615-867-5309",
-            "address": "123 asdf st.",
-            "title": "tech"
-        }
-    },
-    {
-        "model": "blueflamingoapi.technician",
-        "pk": 3,
-        "fields": {
-            "user": 3,
-            "phone_number": "615-867-5309", 
-            "address": "123 asdf st.",
-            "title": "tech"    
-        }
     }
 ]
